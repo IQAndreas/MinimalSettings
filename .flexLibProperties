@@ -2,7 +2,13 @@
 <flexLibProperties includeAllClasses="true" version="3">
   <includeClasses>
     <classEntry path="aRenberg.minimalsettings.MinimalSettings"/>
+    <classEntry path="aRenberg.minimalsettings.settings.ReadonlySetting"/>
+    <classEntry path="aRenberg.minimalsettings.MinimalSettingsParser"/>
+    <classEntry path="aRenberg.minimalsettings.settings.Action"/>
     <classEntry path="aRenberg.minimalsettings.settings.Setting"/>
+    <classEntry path="aRenberg.minimalsettings.settings.MainSettings"/>
+    <classEntry path="aRenberg.minimalsettings.settings.BooleanSetting"/>
+    <classEntry path="aRenberg.minimalsettings.settings.NumericSetting"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>
