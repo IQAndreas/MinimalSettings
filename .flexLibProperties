@@ -2,6 +2,7 @@
 <flexLibProperties includeAllClasses="true" version="3">
   <includeClasses>
     <classEntry path="aRenberg.minimalsettings.MinimalSettings"/>
+    <classEntry path="aRenberg.minimalsettings.settings.Setting"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>
