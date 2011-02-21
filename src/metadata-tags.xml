@@ -1,0 +1,29 @@
+<flex-config xmlns="http://www.adobe.com/2006/flex-config">
+	<compiler>
+		
+		<keep-as3-metadata>
+		
+			<name>Settings</name>
+			
+			<name>Action</name>
+			
+			<name>Number</name>
+			<name>Percent</name>
+			<name>int</name>
+			<name>uint</name>
+			
+			<name>String</name>
+			<name>Option</name>
+			
+		</keep-as3-metadata>
+		
+		<keep-generated-actionscript>true</keep-generated-actionscript>
+		
+		<!--<source-path>
+			<path-element>.</path-element>
+	    </source-path>-->
+	</compiler>
+
+	<!--<output>C:\Program Files\Adobe\Flex\Flex SDK 2\bin\Index.swf</output>-->
+
+</flex-config>
