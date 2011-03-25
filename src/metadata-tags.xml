@@ -15,6 +15,12 @@
 			<name>String</name>
 			<name>Option</name>
 			
+			<!-- ADD IN THE FUTURE
+			
+			<name>Color</name>
+			
+			-->
+			
 		</keep-as3-metadata>
 		
 		<keep-generated-actionscript>true</keep-generated-actionscript>
