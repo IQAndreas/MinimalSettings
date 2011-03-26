@@ -79,13 +79,16 @@ package aRenberg.minimalsettings.settings
 		}
 		
 		
+		public function getAction(name:String):String
+		{
+			return actions[name] || null;
+		}
 		
 		public function getFunction(name:String, allowActions:Boolean = true):Function
 		{
 			if (allowActions)
 			{
-				//Jump up through aliases
-				var alias:String = actions[name];
+				var alias:String = this.getAction(name);
 				if (alias) { name = alias; }
 			}
 			
