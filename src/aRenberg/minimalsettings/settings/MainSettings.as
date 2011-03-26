@@ -21,6 +21,8 @@ package aRenberg.minimalsettings.settings
 			_onChangeName = null;
 			
 			actions = new Object();
+			settings = new Vector.<Setting>();
+			enums = new Object();
 		}
 		
 		public function populate(metadata:IMetadata):void
@@ -58,17 +60,22 @@ package aRenberg.minimalsettings.settings
 			}
 		}
 		
+		private var settings:Vector.<Setting>;
 		public function registerSettings(settingsVector:Vector.<Setting>):void
 		{
-			for each (var setting:Setting in settingsVector)
+			//A quick "settingsVector.concat()" will do the exact same thing
+			/*for each (var setting:Setting in settingsVector)
 			{
-				
-			}
+				settings.push(setting);
+			}*/
+			settings = settingsVector;
 		}
 		
+		private var enums:Object;
 		public function registerOptions(optionsVector:Vector.<Setting>):void
 		{
 			//Group by "targetName"
+			//for each (var option:Setting
 		}
 		
 		
@@ -87,6 +94,19 @@ package aRenberg.minimalsettings.settings
 			
 			//May return null
 			return func;
+		}
+		
+		public function getSetting(targetName:String):Setting
+		{
+			for each (var setting:Setting in settings)
+			{
+				if (setting.targetName == targetName)
+				{
+					return setting;
+				}
+			}
+			
+			return null;
 		}
 		
 		

@@ -13,6 +13,9 @@
 			<name>uint</name>
 			
 			<name>String</name>
+			<name>Text</name>
+			<name>Word</name>
+
 			<name>Option</name>
 			
 			<!-- ADD IN THE FUTURE
