@@ -40,9 +40,22 @@ package aRenberg.minimalsettings.settings
 		}
 		
 		private var _minValue:Number;
+		public function get minValue():Number
+		{ return _minValue; }
+		
 		private var _maxValue:Number;
+		public function get maxValue():Number 
+		{ return _maxValue; }
+		
 		private var _step:Number;
+		public function get step():Number
+		{ return _step; }
+		
+		//It doesn't actually round them, it "int"s them... Should I change this name to clarify that?
 		private var _roundedValues:Boolean;
+		public function get roundedValues():Boolean
+		{ return _roundedValues; }
+		
 		
 		public function getValue():Number
 		{
