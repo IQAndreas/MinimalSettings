@@ -1,6 +1,7 @@
 package aRenberg.minimalsettings.settings
 {
 	import aRenberg.metadata.IMetadata;
+	import aRenberg.minimalsettings.settings.common.EnumOption;
 	import aRenberg.minimalsettings.settings.common.Meta;
 	import aRenberg.minimalsettings.settings.common.Setting;
 	import aRenberg.utils.nullFunction;
@@ -72,10 +73,14 @@ package aRenberg.minimalsettings.settings
 		}
 		
 		private var enums:Object;
-		public function registerOptions(optionsVector:Vector.<Setting>):void
+		public function registerOptions(optionsVector:Vector.<EnumOption>):void
 		{
 			//Group by "targetName"
-			//for each (var option:Setting
+			for each (var option:EnumOption in optionsVector)
+			{
+				var enum:EnumSetting = enums[option.targetName] || option.buildEnumSetting();
+				enum.registerOption(option);
+			}
 		}
 		
 		

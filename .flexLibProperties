@@ -11,6 +11,7 @@
     <classEntry path="aRenberg.minimalsettings.settings.NumericSetting"/>
     <classEntry path="aRenberg.minimalsettings.settings.common.Meta"/>
     <classEntry path="aRenberg.minimalsettings.settings.EnumSetting"/>
+    <classEntry path="aRenberg.minimalsettings.settings.common.EnumOption"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

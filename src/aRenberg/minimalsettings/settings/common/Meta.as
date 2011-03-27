@@ -11,6 +11,8 @@ package aRenberg.minimalsettings.settings.common
 		public static const ACTION_NAME:String = 'name';
 		public static const ACTION_VISIBLE:String = 'visible';
 		
+		public static const ENUM_VALUE:String = 'value';
+		
 		
 		public function Meta()
 		{

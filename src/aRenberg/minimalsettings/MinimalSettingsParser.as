@@ -7,8 +7,11 @@ package aRenberg.minimalsettings
 	import aRenberg.metadata.MetadataUtils;
 	import aRenberg.minimalsettings.settings.Action;
 	import aRenberg.minimalsettings.settings.BooleanSetting;
+	import aRenberg.minimalsettings.settings.EnumSetting;
 	import aRenberg.minimalsettings.settings.MainSettings;
 	import aRenberg.minimalsettings.settings.NumericSetting;
+	import aRenberg.minimalsettings.settings.StringSetting;
+	import aRenberg.minimalsettings.settings.common.EnumOption;
 	import aRenberg.minimalsettings.settings.common.Setting;
 
 	internal class MinimalSettingsParser
@@ -19,7 +22,7 @@ package aRenberg.minimalsettings
 			
 			actions = new Vector.<Action>();
 			settings = new Vector.<Setting>();
-			options = new Vector.<Setting>();
+			options = new Vector.<EnumOption>();
 			
 			
 			_mainSettings = new MainSettings(target);
@@ -48,7 +51,7 @@ package aRenberg.minimalsettings
 		
 		private var actions:Vector.<Action>;
 		private var settings:Vector.<Setting>;
-		private var options:Vector.<Setting>;
+		private var options:Vector.<EnumOption>;
 		
 		
 		private function extractMainSettings(target:*):void
@@ -82,10 +85,10 @@ package aRenberg.minimalsettings
 			this.registerMultipleHandlers(parser, Action.METADATA_NAMES, 			onAction);
 			this.registerMultipleHandlers(parser, BooleanSetting.METADATA_NAMES, 	onBooleanSetting);
 			this.registerMultipleHandlers(parser, NumericSetting.METADATA_NAMES, 	onNumericSetting);
+			this.registerMultipleHandlers(parser, StringSetting.METADATA_NAMES, 	onStringSetting);
 			
-			//TODO: StringSetting
-			//TODO: EnumSetting
-			
+			parser.registerHandler(EnumSetting.OPTION, onEnumOption);
+						
 			_allMetadata = parser.parseObject(target);
 		}
 		
@@ -141,6 +144,36 @@ package aRenberg.minimalsettings
 			//else
 			return null;
 		}
+		
+		private function onStringSetting(metadataXML:XML):IMetadata
+		{
+			var metadata:IMetadata = MetadataUtils.parse(metadataXML);
+			
+			if ((metadata.targetType == MetadataType.VARIABLE) || (metadata.targetType == MetadataType.ACCESSOR))
+			{
+				settings.push(new StringSetting(_mainSettings, metadata));
+				return metadata;
+			}
+			
+			//else
+			return null;
+		}
+		
+		private function onEnumOption(metadataXML:XML):IMetadata
+		{
+			var metadata:IMetadata = MetadataUtils.parse(metadataXML);
+			
+			if ((metadata.targetType == MetadataType.VARIABLE) || (metadata.targetType == MetadataType.ACCESSOR))
+			{
+				options.push(new EnumOption(_mainSettings, metadata));
+				return metadata;
+			}
+			
+			//else
+			return null;
+		}
+		
+		
 		
 		
 	}
