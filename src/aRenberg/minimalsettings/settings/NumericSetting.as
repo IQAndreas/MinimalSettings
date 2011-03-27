@@ -30,6 +30,8 @@ package aRenberg.minimalsettings.settings
 		{
 			super(settings, metadata);
 			
+			//if (!metadata.targetReadable) { throw new Error("Target property '" + this.targetName + "' must have read privelages to function properly."); }
+			
 			var defaults:Object = NumericSetting.getDefaultValues(metadata.name);
 			_minValue = metadata.getArgNumeric('min', defaults.minValue);
 			_maxValue = metadata.getArgNumeric('max', defaults.maxValue);
@@ -57,20 +59,51 @@ package aRenberg.minimalsettings.settings
 		{ return _roundedValues; }
 		
 		
+		
+		/*override protected function updateStoredValue():void
+		{
+			if (metadata.targetReadable)
+			{
+				storedValue = this.getValue();
+			}
+			//else { cry(); }
+		}*/
+		
 		public function getValue():Number
 		{
 			return Number(settings.getProperty(this.targetName));
 		}
 		
-		public function setValue(value:Number):void
+		//Returns the value you set it to (in case it's different)
+		public function setValue(value:Number):Number
 		{
-			if (_roundedValues) { value = int(value); }
+			if (!this.readonly)
+			{
+				if (_roundedValues) { value = int(value); }
+				
+				if (value > _maxValue) { value = _maxValue; }
+				if (value < _minValue) { value = _minValue; }
+				
+				settings.setProperty(this.targetName, value);
+				this.onChange.call();
+				
+				return value;
+			}
 			
-			if (value > _maxValue) { value = _maxValue; }
-			if (value < _minValue) { value = _minValue; }
-			
-			settings.setProperty(this.targetName, value);
-			this.onChange.call();
+			//else
+			return this.getValue();
+		}
+		
+		public function increment(amount:Number = NaN):Number
+		{
+			if (isNaN(amount)) { amount = _step; }
+			return this.setValue(this.getValue() + amount);
+		}
+		
+		public function decrement(amount:Number = NaN):Number
+		{
+			if (isNaN(amount)) { amount = _step; }
+			return this.setValue(this.getValue() - amount);
 		}
 	}
 }

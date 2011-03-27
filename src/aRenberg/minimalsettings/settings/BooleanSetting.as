@@ -20,10 +20,17 @@ package aRenberg.minimalsettings.settings
 			return Boolean(settings.getProperty(this.targetName));
 		}
 		
-		public function setValue(value:Boolean):void
+		public function setValue(value:Boolean):Boolean
 		{
-			settings.setProperty(this.targetName, value);
-			this.onChange.call();
+			if (!this.readonly)
+			{
+				settings.setProperty(this.targetName, value);
+				this.onChange.call(); //Even call "onChange" if the new value is not different?
+				return value;
+			}
+			
+			//else
+			return this.getValue();
 		}
 	}
 }

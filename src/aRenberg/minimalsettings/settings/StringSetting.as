@@ -14,9 +14,9 @@ package aRenberg.minimalsettings.settings
 			switch (name)
 			{
 				//TODO
-				case STRING: 	return { maxLength:int.MAX_VALUE };
-				case TEXT: 		return { maxLength:int.MAX_VALUE };
-				case WORD: 		return { maxLength:int.MAX_VALUE };
+				case STRING: 	return { maxChars:int.MAX_VALUE, multiline:false };
+				case TEXT: 		return { maxChars:int.MAX_VALUE, multiline:true };
+				case WORD: 		return { maxChars:int.MAX_VALUE, multiline:false };
 				default: 		return { };
 			}
 		}
@@ -30,23 +30,33 @@ package aRenberg.minimalsettings.settings
 			super(settings, metadata);
 			
 			var defaults:Object = StringSetting.getDefaultValues(metadata.name);
-			_maxLength = metadata.getArgNumeric('max', defaults.maxLength);
+			_maxChars = metadata.getArgNumeric('max', defaults.maxChars);
+			_multiline = Boolean(metadata.getArg('multiline', defaults.multiline));
 		}
 		
-		private var _maxLength:int;
-		//private var _multiline:Boolean;
+		private var _maxChars:int;
+		private var _multiline:Boolean;
 		
 		public function getValue():String
 		{
 			return String(settings.getProperty(this.targetName));
 		}
 		
-		public function setValue(value:String):void
+		public function setValue(value:String):String
 		{
-			if (value.length > _maxLength) { value = value.substr(0, _maxLength); }
+			if (!this.readonly)
+			{
+				if (value.length > _maxChars) { value = value.substr(0, _maxChars); }
+				if (!_multiline) 			  { value = value.replace(/[\r\n]+/, ""); }
+				
+				settings.setProperty(this.targetName, value);
+				this.onChange.call();
+				
+				return value;
+			}
 			
-			settings.setProperty(this.targetName, value);
-			this.onChange.call();
+			//else
+			return this.getValue();
 		}
 	}
 }

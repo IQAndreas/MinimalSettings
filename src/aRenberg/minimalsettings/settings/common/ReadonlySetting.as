@@ -12,8 +12,10 @@ package aRenberg.minimalsettings.settings.common
 			this.metadata = metadata;
 			
 			_targetName = metadata.targetName;
+			_readonly = true;
 			
 			_label = metadata.getArg(Meta.LABEL, this.targetName);
+			
 		}
 		
 		protected var settings:MainSettings;
@@ -28,6 +30,10 @@ package aRenberg.minimalsettings.settings.common
 		protected var _label:String;
 		public function get label():String
 		{ return _label; }
+		
+		protected var _readonly:Boolean = true;
+		public function get readonly():Boolean
+		{ return _readonly; }
 		
 		
 	}

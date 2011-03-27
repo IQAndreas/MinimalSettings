@@ -10,6 +10,7 @@
     <classEntry path="aRenberg.minimalsettings.settings.BooleanSetting"/>
     <classEntry path="aRenberg.minimalsettings.settings.NumericSetting"/>
     <classEntry path="aRenberg.minimalsettings.settings.common.Meta"/>
+    <classEntry path="aRenberg.minimalsettings.settings.EnumSetting"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

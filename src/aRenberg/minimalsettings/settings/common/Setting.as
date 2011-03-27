@@ -10,8 +10,19 @@ package aRenberg.minimalsettings.settings.common
 		{
 			super(settings, metadata);
 			
+			//I know this will totally mess up if the target is writable but not readable.
+			//I hate this part. I'll just be stubborn and ignore those possible errors.
+			_readonly = !metadata.targetWriteable;
+			
 			_onChange = metadata.getArg(Meta.ONCHANGE, null);
 		}
+		
+		
+		/*protected var storedValue:*;
+		protected function updateStoredValue():void
+		{
+			//Override me plz
+		}*/
 		
 		
 		protected var _onChange:String;
